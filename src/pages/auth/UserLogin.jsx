@@ -2,9 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import API_ROUTE from "../../api/API_Route";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         mobileNumber: "",
         password: "",
@@ -25,9 +26,19 @@ const UserLogin = () => {
             toast.warning("Password cannot be empty.");
             return;
         }
+
+        const tempData = {
+            password: userData.password,
+            mobileNumber: Number(userData.mobileNumber),
+        };
         try {
-            const response = await axios.post(API_ROUTE.USER_LOGIN, userData);
-            console.log(response);
+            const { data } = await axios.post(API_ROUTE.USER_LOGIN, tempData);
+            if (data.success) {
+                toast.success("Login Successful !. ");
+                navigate("/", {
+                    replace: true,
+                });
+            }
         } catch (error) {
             console.log("login error", error);
 
