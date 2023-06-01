@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import API_ROUTE from "../../api/API_Route";
 import { Link } from "react-router-dom";
 
@@ -12,18 +13,33 @@ const UserLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(userData);
-
+        if (userData.mobileNumber === "") {
+            toast.warning("Mobile number cannot be empty.");
+            return;
+        }
+        if (userData.mobileNumber.length !== 10) {
+            toast.warning("Mobile number should be must be 10 digits.");
+            return;
+        }
+        if (userData.password === "") {
+            toast.warning("Password cannot be empty.");
+            return;
+        }
         try {
             const response = await axios.post(API_ROUTE.USER_LOGIN, userData);
             console.log(response);
         } catch (error) {
-            console.log(error);
+            console.log("login error", error);
+
+            const errorData = error?.response?.data;
+            console.log("errorData", errorData);
+            toast.error(errorData?.error);
         }
     };
     return (
-        <div className='container '>
+        <div className='container d-flex justify-content-center'>
             <div className='login-container'>
-                <div className='card p-3 shadow'>
+                <div className='card card-sm p-3 shadow'>
                     <h3 className='text-success text-center py-2 my-2'>
                         Login
                     </h3>
@@ -76,7 +92,7 @@ const UserLogin = () => {
                                     </div>
                                 </div>
                                 <div className='col-12'>
-                                    <div className='float-end mb-3'>
+                                    <div className='float-end my-3'>
                                         <button
                                             onClick={handleSubmit}
                                             className='btn btn-success  '>
@@ -101,6 +117,7 @@ const UserLogin = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer newestOnTop={true} />
         </div>
     );
 };

@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 const NavbarComponent = () => {
     return (
-        <nav className='navbar bg-primary text-success navbar-expand-lg bg-body-tertiary'>
+        <nav className='navbar bg-primary text-dark navbar-expand-lg bg-body-tertiary'>
             <div className='container'>
-                <a className='navbar-brand' href='#'>
-                    Navbar
-                </a>
+                <Link to={"/"} className='navbar-brand' href='#'>
+                    Home
+                </Link>
                 <button
                     className='navbar-toggler'
                     type='button'
@@ -18,32 +20,13 @@ const NavbarComponent = () => {
                 <div
                     className='collapse navbar-collapse'
                     id='navbarSupportedContent'>
-                    <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+                    <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
                         <li className='nav-item'>
-                            <a
-                                className='nav-link active'
-                                aria-current='page'
-                                href='#'>
-                                Home
-                            </a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link' href='#'>
-                                Link
-                            </a>
-                        </li>
-                        <li className='nav-item dropdown'>
-                            <a
-                                className='nav-link dropdown-toggle'
-                                href='#'
-                                role='button'
-                                data-bs-toggle='dropdown'
-                                aria-expanded='false'>
-                                Dropdown
-                            </a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link disabled'>Disabled</a>
+                            <Link
+                                to={"/auth/login"}
+                                className='nav-link active'>
+                                Login
+                            </Link>
                         </li>
                     </ul>
                 </div>

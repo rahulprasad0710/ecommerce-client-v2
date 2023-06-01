@@ -1,3 +1,7 @@
 .page-container {
     min-height: 80vh;
 }
+.login-container {
+    margin-top: 2rem;
+    width: 500px;
+}
