@@ -3,8 +3,15 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import API_ROUTE from "../../api/API_Route";
 import { Link, useNavigate } from "react-router-dom";
+//context
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const UserLogin = () => {
+    const { userInfo, loginFn } = useContext(AuthContext);
+    console.log("login ma user", userInfo);
+    const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
         mobileNumber: "",
@@ -33,8 +40,9 @@ const UserLogin = () => {
         };
         try {
             const { data } = await axios.post(API_ROUTE.USER_LOGIN, tempData);
+            console.log(data);
             if (data.success) {
-                toast.success("Login Successful !. ");
+                loginFn(data?.data, rememberMe);
                 navigate("/", {
                     replace: true,
                 });
@@ -96,10 +104,45 @@ const UserLogin = () => {
                                                 setUserData(tempData);
                                             }}
                                             value={userData.password}
-                                            type='password'
+                                            type={
+                                                showPassword
+                                                    ? "text"
+                                                    : "password"
+                                            }
                                             className='form-control'
                                             placeholder='Please Enter your mobile Number'
                                         />
+                                        <div className='d-flex align-items-center justify-content-end'>
+                                            <p className='text-primary mb-0 '>
+                                                {" "}
+                                                Show Password
+                                            </p>
+                                            <input
+                                                type='checkbox'
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                                className='form-checkbox mx-2'
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-12'>
+                                    <div className='mb-2'>
+                                        <div className='d-flex align-items-center'>
+                                            <p className='text-primary mb-0 '>
+                                                Remember Me
+                                            </p>
+                                            <input
+                                                type='checkbox'
+                                                onClick={() =>
+                                                    setRememberMe(!rememberMe)
+                                                }
+                                                className='form-checkbox mx-2'
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='col-12'>

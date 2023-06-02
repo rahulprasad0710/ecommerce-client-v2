@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import API_ROUTE from "../../api/API_Route";
+import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
+    const navigate = useNavigate();
     const [newUser, setnewUser] = useState({
         username: "",
         name: "",
@@ -21,6 +23,10 @@ const UserRegister = () => {
                 API_ROUTE.USER_REGISTER,
                 tempData
             );
+
+            if (response.data.success) {
+                navigate("/auth/login");
+            }
             console.log("response", response);
         } catch (error) {
             console.log(error);
