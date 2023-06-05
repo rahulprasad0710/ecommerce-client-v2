@@ -14,21 +14,18 @@ const UserLogin = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
-        mobileNumber: "",
+        email: "",
         password: "",
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(userData);
-        if (userData.mobileNumber === "") {
-            toast.warning("Mobile number cannot be empty.");
+        if (userData.email === "") {
+            toast.warning("Emali Address cannot be empty.");
             return;
         }
-        if (userData.mobileNumber.length !== 10) {
-            toast.warning("Mobile number should be must be 10 digits.");
-            return;
-        }
+
         if (userData.password === "") {
             toast.warning("Password cannot be empty.");
             return;
@@ -36,19 +33,19 @@ const UserLogin = () => {
 
         const tempData = {
             password: userData.password,
-            mobileNumber: Number(userData.mobileNumber),
+            email: userData.email,
         };
         try {
-            const { data } = await axios.post(API_ROUTE.USER_LOGIN, tempData);
-            console.log(data);
+            const { data } = await axios.post(API_ROUTE.ADMIN_LOGIN, tempData);
+            console.log(data, "Admin data");
             if (data.success) {
                 console.log("login success", data);
                 const { rest, accessToken } = data.data;
                 const tempData = {
                     token: accessToken,
-                    name: rest.name,
-                    isAdmin: false,
-                    Permissions: [],
+                    name: rest.email,
+                    isAdmin: rest.isAdmin,
+                    Permissions: rest.permission,
                 };
                 console.log("tempData", tempData);
                 const isLogin = loginFn(tempData, rememberMe);
@@ -70,7 +67,7 @@ const UserLogin = () => {
             <div className='login-container'>
                 <div className='card card-sm p-3 shadow'>
                     <h3 className='bg-success text-light text-center py-2 my-2'>
-                        Login
+                        Admin Login
                     </h3>
                     <div className='card-body'>
                         <form action=''>
@@ -80,21 +77,20 @@ const UserLogin = () => {
                                         <label
                                             htmlFor=''
                                             className='form-label'>
-                                            Mobile Number
+                                            Email Address
                                         </label>
                                         <input
                                             onChange={(e) => {
                                                 const tempData = {
                                                     ...userData,
-                                                    mobileNumber:
-                                                        e.target.value,
+                                                    email: e.target.value,
                                                 };
                                                 setUserData(tempData);
                                             }}
-                                            value={userData.mobileNumber}
-                                            type='number'
+                                            value={userData.email}
+                                            type='email'
                                             className='form-control'
-                                            placeholder='Please Enter your mobile Number'
+                                            placeholder='Please Enter your email address.'
                                         />
                                     </div>
                                 </div>
@@ -162,18 +158,6 @@ const UserLogin = () => {
                                             className='btn btn-success  '>
                                             Submit
                                         </button>
-                                    </div>
-                                </div>
-                                <div className='col-12'>
-                                    <div className='float-end'>
-                                        <p>
-                                            Don&apos;t have an account ?{" "}
-                                            <Link
-                                                to='/auth/signup'
-                                                className='text-primary'>
-                                                Signup Here
-                                            </Link>
-                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import API_ROUTE from "../../api/API_Route";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
     const navigate = useNavigate();
@@ -27,16 +27,17 @@ const UserRegister = () => {
             if (response.data.success) {
                 navigate("/auth/login");
             }
-            console.log("response", response);
         } catch (error) {
             console.log(error);
         }
     };
 
     return (
-        <div className='container'>
-            <h3 className='text-success text-center py-2 my-2'>Signup</h3>
+        <div className='container my-3'>
             <div className='card p-3 shadow'>
+                <h3 className='bg-primary text-light text-center py-2 my-2'>
+                    Sign up
+                </h3>
                 <div className='card-body'>
                     <form action=''>
                         <div className='row'>
@@ -152,7 +153,22 @@ const UserRegister = () => {
                                     />
                                 </div>
                             </div>
-                            <div className='col-12'>
+                            <div className='col-12 col-md-8'>
+                                <div>
+                                    <p className='text-info'>
+                                        ALready have an account?
+                                        <span>
+                                            <Link
+                                                className='nav-item mx-3'
+                                                to='/auth/login'>
+                                                Login
+                                            </Link>
+                                        </span>
+                                        `
+                                    </p>
+                                </div>
+                            </div>
+                            <div className='col-12 col-md-4'>
                                 <div className='float-end'>
                                     <button
                                         type='submit'

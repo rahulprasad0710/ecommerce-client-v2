@@ -3,34 +3,28 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const user = {
+    const userIntialState = {
         name: "",
         isAdmin: false,
         Permissions: [],
         token: null,
     };
 
-    const [userInfo, setuserInfo] = useState(user);
+    const [userInfo, setuserInfo] = useState(
+        JSON.parse(localStorage.getItem("user")) ||
+            JSON.parse(sessionStorage.getItem("user")) ||
+            userIntialState
+    );
 
-    const [darkMode, setDarkMode] = useState(false);
-
-    const loginFn = (data, rememberMe) => {
-        console.log("from Context", data, rememberMe);
-        const user = {
-            name: data.rest.name,
-            isAdmin: false,
-            Permissions: [],
-            token: data.accessToken,
-        };
-        setuserInfo(user);
-
+    const loginFn = (userDataFromLogin, rememberMe) => {
+        setuserInfo(userDataFromLogin);
         localStorage.setItem("rememberMe", rememberMe);
-
         if (rememberMe) {
-            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(userDataFromLogin));
         } else {
-            sessionStorage.setItem("user", JSON.stringify(user));
+            sessionStorage.setItem("user", JSON.stringify(userDataFromLogin));
         }
+        return true;
     };
 
     const logoutFn = () => {
@@ -40,19 +34,13 @@ const AuthProvider = ({ children }) => {
         } else {
             sessionStorage.removeItem("user");
         }
-        setuserInfo({
-            name: "",
-            isAdmin: false,
-            Permissions: [],
-            token: null,
-        });
+        setuserInfo(userIntialState);
         localStorage.removeItem("rememberMe");
+        return true;
     };
 
     const authContextValue = {
         userInfo,
-        darkMode,
-        setDarkMode,
         loginFn,
         logoutFn,
     };

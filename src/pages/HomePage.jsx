@@ -1,9 +1,5 @@
 const HomePage = () => {
-    return (
-        <div>
-            <button className='btn btn-primary'>Click</button>
-        </div>
-    );
+    return <div className='container py-3'></div>;
 };
 
 export default HomePage;
