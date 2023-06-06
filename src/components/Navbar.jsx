@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-const NavbarComponent = () => {
+const Navbar = () => {
     const { userInfo, logoutFn } = useContext(AuthContext);
     console.log("userInfo navbar", userInfo);
     const navigate = useNavigate();
@@ -79,11 +79,11 @@ const NavbarComponent = () => {
                                     </Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <btn
+                                    <button
                                         onClick={handleLogout}
                                         className='nav-link cursor-pointer active'>
                                         Logout
-                                    </btn>
+                                    </button>
                                 </li>
                             </>
                         )}
@@ -103,4 +103,4 @@ const NavbarComponent = () => {
     );
 };
 
-export default NavbarComponent;
+export default Navbar;

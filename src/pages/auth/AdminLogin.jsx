@@ -50,7 +50,7 @@ const UserLogin = () => {
                 console.log("tempData", tempData);
                 const isLogin = loginFn(tempData, rememberMe);
                 if (isLogin) {
-                    navigate("/", {
+                    navigate("/admin", {
                         replace: true,
                     });
                 }

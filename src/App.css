@@ -5,3 +5,14 @@
     margin-top: 2rem;
     width: 500px;
 }
+
+.sidebar-container {
+    background: #efefef;
+    min-width: 250px;
+    height: 100vh;
+    margin-right: 1rem;
+}
+
+.wrapper {
+    min-height: 100%;
+}
