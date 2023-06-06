@@ -27,21 +27,17 @@ const AdminSidebar = () => {
             }>
             <div className='wrapper d-flex flex-column flex-shrink-0 bg-light'>
                 <div className='sidebar-header-container'>
-                    {hideSidebar ? null : (
-                        <div className='sidebar-logo-container'>
-                            <img
-                                src={LOGO}
-                                alt='logo'
-                                className='sidebar-logo img-fluid'
-                            />
-                        </div>
-                    )}
-
                     <div
+                        title='Click to hide/show sidebar'
                         onClick={() => setHideSidebar((prev) => !prev)}
                         className='sidebar-hamberger-container '>
                         <i className='fa-solid fa-bars'></i>
                     </div>
+                    {hideSidebar ? null : (
+                        <span className='nav-link-text font-bolder'>
+                            Admin Panel
+                        </span>
+                    )}
                 </div>
                 <hr className='my-1' />
                 <ul className='nav nav-pills flex-column mb-auto'>

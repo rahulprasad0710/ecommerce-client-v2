@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import LOGO from "../assets/img/logo.png";
 
 const Navbar = () => {
     const { userInfo, logoutFn } = useContext(AuthContext);
-    console.log("userInfo navbar", userInfo);
     const navigate = useNavigate();
     const handleLogout = () => {
         const isLogout = logoutFn();
@@ -16,10 +16,16 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='navbar bg-primary text-dark navbar-expand-md bg-body-tertiary shadow-sm'>
+        <nav className='navbar bg-primary text-dark navbar-expand-md bg-body-tertiary shadow-sm '>
             <div className='container'>
                 <Link to={"/"} className='navbar-brand' href='#'>
-                    Home
+                    <div className='sidebar-logo-container'>
+                        <img
+                            src={LOGO}
+                            alt='logo'
+                            className='sidebar-logo img-fluid'
+                        />
+                    </div>
                 </Link>
                 <button
                     className='navbar-toggler'

@@ -13,6 +13,7 @@ import AdminLayout from "../pages/admin/Layout.jsx";
 import Dashboard from "../pages/admin/Dashboard";
 import AddAdmin from "../pages/admin/AddAdmin";
 import PageNotFound from "../pages/PageNotFound";
+import AdminProtectedRoute from "../components/auth/AdminProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +50,11 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "add-admin",
-                        element: <AddAdmin permissionName='ADD_ADMIN' />,
+                        element: (
+                            <AdminProtectedRoute permissionRequired='ADMIN_ADD'>
+                                <AddAdmin />
+                            </AdminProtectedRoute>
+                        ),
                     },
                 ],
             },

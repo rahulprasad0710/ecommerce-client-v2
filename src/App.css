@@ -16,16 +16,18 @@
 .sidebar-container-open {
     min-width: 200px;
     width: 200px;
+    transition: ease 0.5s all;
 }
 
 .sidebar-container-close {
     width: 80px;
+    transition: ease 0.5s all;
 }
 
 .sidebar-container .sidebar-header-container {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .sidebar-logo-container {
