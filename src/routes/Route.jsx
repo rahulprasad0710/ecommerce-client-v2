@@ -44,7 +44,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "add-admin",
-                        element: <AddAdmin />,
+                        element: <AddAdmin permissionName='ADD_ADMIN' />,
                     },
                 ],
             },
