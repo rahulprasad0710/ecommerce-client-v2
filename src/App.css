@@ -11,8 +11,36 @@
     min-width: 250px;
     height: 100vh;
     margin-right: 1rem;
+    box-shadow: 0px 0px 3px rgba(7, 12, 10, 0.511);
 }
 
 .wrapper {
     min-height: 100%;
+    padding: 0.5rem;
+}
+
+.sidebar-link {
+    transition: 0.25s;
+}
+
+.sidebar-container .nav-link-item {
+    color: #000;
+    margin: 5px 2px;
+}
+
+.sidebar-container .nav-link {
+    height: 100%;
+    padding: 0.8rem 1rem;
+}
+.sidebar-container .nav-link:hover,
+.nav-link:focus {
+    background-color: #66c8876a;
+}
+
+.sidebar-container .nav-link-text {
+    margin-left: 0.5rem;
+}
+
+.sidebar-container .active {
+    background-color: #0bd095f8 !important;
 }

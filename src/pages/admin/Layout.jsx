@@ -1,25 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 // Context
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AdminSidebar from "../../components/AdminSidebar";
-import PageNotFound from "../PageNotFound";
 
 const Layout = () => {
     const { userInfo } = useContext(AuthContext);
     return (
-        <div>
+        <>
             {userInfo?.isAdmin ? (
                 <div className=' d-flex'>
                     <AdminSidebar />
-                    <section>
+                    <section className='py-3'>
                         <Outlet />
                     </section>
                 </div>
             ) : (
-                <PageNotFound />
+                <Navigate to={"/page-not-found"} replace={true} />
             )}
-        </div>
+        </>
     );
 };
 

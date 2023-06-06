@@ -16,7 +16,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='navbar bg-primary text-dark navbar-expand-md bg-body-tertiary'>
+        <nav className='navbar bg-primary text-dark navbar-expand-md bg-body-tertiary shadow-sm'>
             <div className='container'>
                 <Link to={"/"} className='navbar-brand' href='#'>
                     Home
@@ -77,13 +77,6 @@ const Navbar = () => {
                                         className='nav-link active'>
                                         <i className='fa-solid fa-user-shield'></i>
                                     </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <button
-                                        onClick={handleLogout}
-                                        className='nav-link cursor-pointer active'>
-                                        Logout
-                                    </button>
                                 </li>
                             </>
                         )}

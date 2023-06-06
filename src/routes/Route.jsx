@@ -12,6 +12,7 @@ import UserRegister from "../pages/auth/UserRegister";
 import AdminLayout from "../pages/admin/Layout.jsx";
 import Dashboard from "../pages/admin/Dashboard";
 import AddAdmin from "../pages/admin/AddAdmin";
+import PageNotFound from "../pages/PageNotFound";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage />,
+            },
+            {
+                path: "/page-not-found",
+                element: <PageNotFound />,
             },
             {
                 path: "/auth/login",
@@ -39,7 +44,7 @@ const router = createBrowserRouter([
                 element: <AdminLayout />,
                 children: [
                     {
-                        path: "",
+                        path: "dashboard",
                         element: <Dashboard />,
                     },
                     {
@@ -49,6 +54,7 @@ const router = createBrowserRouter([
                 ],
             },
         ],
+        errorElement: <PageNotFound />,
     },
 ]);
 
