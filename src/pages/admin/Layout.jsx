@@ -1,11 +1,12 @@
+import { useContext, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 // Context
-import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AdminSidebar from "../../components/AdminSidebar";
 
 const Layout = () => {
     const { userInfo } = useContext(AuthContext);
+
     return (
         <>
             {userInfo?.isAdmin ? (

@@ -63,22 +63,12 @@ const Navbar = () => {
                             </>
                         )}
                         {userInfo?.token && userInfo?.isAdmin && (
-                            <>
-                                <li className='nav-item'>
-                                    <Link
-                                        to={"/profile/wishlist"}
-                                        className='nav-link active'>
-                                        Dashboard
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link
-                                        to={"/cart"}
-                                        className='nav-link active'>
-                                        <i className='fa-solid fa-user-shield'></i>
-                                    </Link>
-                                </li>
-                            </>
+                            <li className='nav-item'>
+                                <Link to={"/cart"} className='nav-link active'>
+                                    <i className='fa-solid fa-user-shield'></i>
+                                    <span className='mx-2'>My Account</span>
+                                </Link>
+                            </li>
                         )}
                         {userInfo?.token == null && (
                             <li className='nav-item'>
