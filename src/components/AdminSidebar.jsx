@@ -66,7 +66,7 @@ const AdminSidebar = () => {
 
                     <li className='nav-link-item sidebar-link'>
                         <NavLink
-                            to='/admin/products'
+                            to='/admin/products/list'
                             title='Products'
                             className='nav-link  link-dark'>
                             <i className='fa-solid fa-box-open '></i>
@@ -77,7 +77,7 @@ const AdminSidebar = () => {
                     </li>
                     <li className='nav-link-item sidebar-link'>
                         <NavLink
-                            to='/admin/products'
+                            to='/admin/customers/list'
                             title='Customers'
                             className='nav-link  link-dark'>
                             <i className='fa-solid fa-users'></i>
@@ -88,7 +88,7 @@ const AdminSidebar = () => {
                     </li>
                     <li className='nav-link-item sidebar-link'>
                         <NavLink
-                            to='/admin/products'
+                            to='/admin/files/list'
                             title='Files'
                             className='nav-link  link-dark'>
                             <i className='fa-regular fa-image'></i>

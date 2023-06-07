@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import ADMIN_PERMISSSION from "../constant/AdminPermission";
 import App from "../App";
 import HomePage from "../pages/HomePage";
 
@@ -8,12 +8,17 @@ import UserLogin from "../pages/auth/UserLogin";
 import AdminLogin from "../pages/auth/AdminLogin";
 import UserRegister from "../pages/auth/UserRegister";
 
+import AdminProtectedRoute from "../components/auth/AdminProtectedRoute";
+
 // Admin Pages
 import AdminLayout from "../pages/admin/Layout.jsx";
 import Dashboard from "../pages/admin/Dashboard";
 import AddAdmin from "../pages/admin/AddAdmin";
 import PageNotFound from "../pages/PageNotFound";
-import AdminProtectedRoute from "../components/auth/AdminProtectedRoute";
+
+// Products
+import ProductLayout from "../pages/product/Layout";
+import ProductList from "../pages/product/ProductList";
 
 const router = createBrowserRouter([
     {
@@ -51,10 +56,31 @@ const router = createBrowserRouter([
                     {
                         path: "add-admin",
                         element: (
-                            <AdminProtectedRoute permissionRequired='ADMIN_ADD'>
+                            <AdminProtectedRoute
+                                permissionRequired={
+                                    ADMIN_PERMISSSION.ADMIN_ADD
+                                }>
                                 <AddAdmin />
                             </AdminProtectedRoute>
                         ),
+                    },
+                    {
+                        path: "products",
+                        element: <ProductLayout />,
+                        children: [
+                            {
+                                path: "list",
+
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.BOOK_VIEW
+                                        }>
+                                        <ProductList />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                        ],
                     },
                 ],
             },
