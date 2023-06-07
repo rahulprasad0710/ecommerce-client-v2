@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import PageNotFound from "../../pages/PageNotFound";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,7 +13,13 @@ const AdminProtectedRoute = (props) => {
             userInfo.Permissions.includes(permissionRequired) ? (
                 children
             ) : (
-                <PageNotFound />
+                <Navigate
+                    to={
+                        userInfo?.isAdmin
+                            ? "/admin/page-not-found"
+                            : "/page-not-found"
+                    }
+                />
             )}
         </>
     );

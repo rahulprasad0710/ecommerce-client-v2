@@ -12,8 +12,10 @@ const Layout = () => {
             {userInfo?.isAdmin ? (
                 <div className=' d-flex'>
                     <AdminSidebar />
-                    <section className='py-3'>
-                        <Outlet />
+                    <section className='py-3 flex-grow-1 '>
+                        <div className='container'>
+                            <Outlet />
+                        </div>
                     </section>
                 </div>
             ) : (

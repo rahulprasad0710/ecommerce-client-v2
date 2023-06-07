@@ -54,6 +54,10 @@ const router = createBrowserRouter([
                         element: <Dashboard />,
                     },
                     {
+                        path: "page-not-found",
+                        element: <PageNotFound />,
+                    },
+                    {
                         path: "add-admin",
                         element: (
                             <AdminProtectedRoute

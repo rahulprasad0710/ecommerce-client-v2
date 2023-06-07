@@ -1,5 +1,11 @@
+import Heading from "../../components/Heading";
+
 const ProductList = () => {
-    return <div>ProductList</div>;
+    return (
+        <div>
+            <Heading title='Product List' btnText='Back' />
+        </div>
+    );
 };
 
 export default ProductList;

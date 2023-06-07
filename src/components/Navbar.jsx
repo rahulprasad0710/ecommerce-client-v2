@@ -17,7 +17,7 @@ const Navbar = () => {
 
     return (
         <nav className='navbar bg-primary text-dark navbar-expand-md bg-body-tertiary shadow-sm '>
-            <div className='container'>
+            <div className='container-fluid'>
                 <Link to={"/"} className='navbar-brand' href='#'>
                     <div className='sidebar-logo-container'>
                         <img
