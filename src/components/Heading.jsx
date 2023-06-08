@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 const Heading = (props) => {
     const { title, btnText, handleClick } = props;
-    console.log("ADD_", handleClick);
     const navigate = useNavigate();
     return (
         <>
