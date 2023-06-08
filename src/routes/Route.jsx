@@ -14,6 +14,7 @@ import AdminProtectedRoute from "../components/auth/AdminProtectedRoute";
 import AdminLayout from "../pages/admin/Layout.jsx";
 import Dashboard from "../pages/admin/Dashboard";
 import AddAdmin from "../pages/admin/AddAdmin";
+import AdminList from "../pages/admin/AdminList";
 import PageNotFound from "../pages/PageNotFound";
 
 // Products
@@ -58,7 +59,18 @@ const router = createBrowserRouter([
                         element: <PageNotFound />,
                     },
                     {
-                        path: "add-admin",
+                        path: "staff-list",
+                        element: (
+                            <AdminProtectedRoute
+                                permissionRequired={
+                                    ADMIN_PERMISSSION.ADMIN_VIEW
+                                }>
+                                <AdminList />
+                            </AdminProtectedRoute>
+                        ),
+                    },
+                    {
+                        path: "add-staff",
                         element: (
                             <AdminProtectedRoute
                                 permissionRequired={

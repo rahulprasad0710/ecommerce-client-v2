@@ -105,7 +105,7 @@ const AdminSidebar = () => {
                     ) && (
                         <li className='nav-link-item sidebar-link'>
                             <NavLink
-                                to='/admin/add-admin'
+                                to='/admin/staff-list'
                                 title='Admin Setting'
                                 className='nav-link  link-dark'>
                                 <i className='fa-solid fa-user-gear'></i>
