@@ -1,24 +1,14 @@
+import axios from "axios";
 import Heading from "../../components/Heading";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import ALL_PERMISSION from "../../constant/AllPermission";
-
-// {
-//   "firstName": "John",
-//   "lastName": "Doe",
-//   "email": "johndoe@example.com",
-//   "status": "ACTIVE",
-//   "isAdmin": true,
-//   "password": "password1234",
-//   "confirmPassword": "password1234",
-//   "mobileNumber": 1234567890,
-//   "permission": ["BOOK_VIEW",
-//     "BOOK_CREATE"]
-// }
+import ApiRoute from "../../api/API_Route";
 
 const AddAdmin = () => {
+    const { userInfo } = useContext(AuthContext);
     const [selectedPermissions, setSelectedPermissions] = useState([
         ALL_PERMISSION[0],
     ]);
@@ -29,10 +19,11 @@ const AddAdmin = () => {
         mobileNumber: "",
         password: "",
         confirmPassword: "",
+        position: "",
     });
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newPermissionData = selectedPermissions.map((item) => {
             return item.value;
         });
@@ -46,6 +37,13 @@ const AddAdmin = () => {
 
         (tempData.mobileNumber = Number(staffData.mobileNumber)),
             console.log({ tempData });
+
+        const response = await axios.post(ApiRoute.ADD_ADMIN, tempData, {
+            headers: {
+                Authorization: `Bearer ${userInfo?.token}`,
+            },
+        });
+        console.log({ response });
     };
 
     return (
@@ -163,6 +161,25 @@ const AddAdmin = () => {
                                         })
                                     }
                                     value={staffData.confirmPassword}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-12 col-md-4'>
+                            <div className='mb-2'>
+                                <label className='form-label'>Postion</label>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    placeholder='Enter staff Position'
+                                    onChange={(e) =>
+                                        setStaffData({
+                                            ...staffData,
+                                            position: e.target.value,
+                                        })
+                                    }
+                                    value={staffData.position}
                                 />
                             </div>
                         </div>

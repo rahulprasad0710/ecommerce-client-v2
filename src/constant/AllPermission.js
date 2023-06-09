@@ -8,20 +8,20 @@ const ALL_PERMISSION = [
         label: "CATEGORY VIEW",
     },
     {
-        value: "BOOK_VIEW",
-        label: "BOOK VIEW",
+        value: "PRODUCT_VIEW",
+        label: "PRODUCT VIEW",
     },
     {
-        value: "BOOK_CREATE",
-        label: "BOOK CREATE",
+        value: "PRODUCT_CREATE",
+        label: "PRODUCT CREATE",
     },
     {
-        value: "BOOK_UPDATE",
-        label: "BOOK UPDATE",
+        value: "PRODUCT_UPDATE",
+        label: "PRODUCT UPDATE",
     },
     {
-        value: "BOOK_DELETE",
-        label: "BOOK DELETE",
+        value: "PRODUCT_DELETE",
+        label: "PRODUCT DELETE",
     },
     {
         value: "USER_VIEW",
