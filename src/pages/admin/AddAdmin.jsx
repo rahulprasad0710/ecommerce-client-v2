@@ -1,4 +1,6 @@
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 import Heading from "../../components/Heading";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -24,26 +26,40 @@ const AddAdmin = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
-        const newPermissionData = selectedPermissions.map((item) => {
-            return item.value;
-        });
+        try {
+            const newPermissionData = selectedPermissions.map((item) => {
+                return item.value;
+            });
 
-        const tempData = {
-            ...staffData,
-            permission: newPermissionData,
-            status: "ACTIVE",
-            isAdmin: true,
-        };
+            const tempData = {
+                ...staffData,
+                permission: newPermissionData,
+                status: "ACTIVE",
+                isAdmin: true,
+            };
 
-        (tempData.mobileNumber = Number(staffData.mobileNumber)),
-            console.log({ tempData });
+            (tempData.mobileNumber = Number(staffData.mobileNumber)),
+                console.log({ tempData });
 
-        const response = await axios.post(ApiRoute.ADD_ADMIN, tempData, {
-            headers: {
-                Authorization: `Bearer ${userInfo?.token}`,
-            },
-        });
-        console.log({ response });
+            const { data } = await axios.post(ApiRoute.ADD_ADMIN, tempData, {
+                headers: {
+                    Authorization: `Bearer ${userInfo?.token}`,
+                },
+            });
+
+            console.log({ datatt: data });
+
+            if (data.success) {
+                toast.success(data.message);
+                navigate("/admin/staff-list");
+            } else {
+                toast.error("Something Went Wrong.");
+            }
+        } catch (error) {
+            toast.error(
+                error?.response?.data?.error ?? "Something Went Wrong."
+            );
+        }
     };
 
     return (
@@ -212,6 +228,7 @@ const AddAdmin = () => {
                     </div>
                 </form>
             </section>
+            <ToastContainer newestOnTop={true} />
         </div>
     );
 };
