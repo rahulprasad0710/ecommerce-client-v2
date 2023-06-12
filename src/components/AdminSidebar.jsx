@@ -99,6 +99,23 @@ const AdminSidebar = () => {
                             )}
                         </NavLink>
                     </li>
+                    {userInfo.Permissions.includes(
+                        ADMIN_PERMISSSION.CATEGORY_VIEW
+                    ) && (
+                        <li className='nav-link-item sidebar-link'>
+                            <NavLink
+                                to='/admin/categories/list'
+                                title='Category Setting'
+                                className='nav-link  link-dark'>
+                                <i className='fa-solid fa-user-gear'></i>
+                                {hideSidebar ? null : (
+                                    <span className='nav-link-text'>
+                                        Categories
+                                    </span>
+                                )}
+                            </NavLink>
+                        </li>
+                    )}
 
                     {userInfo.Permissions.includes(
                         ADMIN_PERMISSSION.ADMIN_ADD

@@ -21,6 +21,11 @@ import PageNotFound from "../pages/PageNotFound";
 import ProductLayout from "../pages/product/Layout";
 import ProductList from "../pages/product/ProductList";
 
+// Category
+import CategoryLayout from "../pages/category/Layout";
+import CategoryList from "../pages/category/CategoryList";
+import AddCategory from "../pages/category/AddCategory";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -93,6 +98,34 @@ const router = createBrowserRouter([
                                             ADMIN_PERMISSSION.BOOK_VIEW
                                         }>
                                         <ProductList />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                        ],
+                    },
+                    {
+                        path: "categories",
+                        element: <CategoryLayout />,
+                        children: [
+                            {
+                                path: "add",
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.CATEGORY_CREATE
+                                        }>
+                                        <AddCategory />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                            {
+                                path: "list",
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.CATEGORY_VIEW
+                                        }>
+                                        <CategoryList />
                                     </AdminProtectedRoute>
                                 ),
                             },

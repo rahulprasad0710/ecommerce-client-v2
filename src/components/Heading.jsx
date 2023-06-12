@@ -19,7 +19,7 @@ const Heading = (props) => {
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr className='my-1' />
         </>
     );
 };

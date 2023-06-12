@@ -6,6 +6,8 @@ const API_ROUTE = {
     ADD_ADMIN: "https://ecommerce-api-jbj8.onrender.com/api/admin/add",
     // staff
     STAFF_LIST: "https://ecommerce-api-jbj8.onrender.com/api/staffs",
+    ADD_CATEGORY: "category",
+    GET_CATEGORY: "category",
 };
 
 export default API_ROUTE;
