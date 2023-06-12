@@ -123,7 +123,18 @@ const AddCategory = () => {
                                             <option
                                                 value={parentItem._id}
                                                 key={parentItem._id}>
-                                                {parentItem.title}
+                                                {selectedLevel === "3" && (
+                                                    <span className='px-3'>
+                                                        Level-1:
+                                                        {
+                                                            parentItem.parent
+                                                                .title
+                                                        }
+                                                    </span>
+                                                )}
+                                                <span className='px-3'>
+                                                    Level-2: {parentItem.title}
+                                                </span>
                                             </option>
                                         ))}
                                     </select>
