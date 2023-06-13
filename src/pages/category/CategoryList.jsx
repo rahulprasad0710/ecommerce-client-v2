@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Heading from "../../components/Heading";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import ADMIN_PERMISSSION from "../../constant/AdminPermission";
 import { PrivateAxios } from "../../api/AxiosInstance";
@@ -15,7 +15,7 @@ const CategoryList = () => {
     const [selectedLevel, setSelectedLevel] = useState(3);
     const [catgData, setCatgData] = useState([]);
 
-    const fetchParentData = async () => {
+    const fetchParentData = useCallback(async () => {
         try {
             const response = await PrivateAxios.get(
                 `${API_ROUTE.GET_CATEGORY}?level=${Number(selectedLevel)}`
@@ -25,11 +25,17 @@ const CategoryList = () => {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [selectedLevel]);
 
     useEffect(() => {
         fetchParentData();
-    }, [selectedLevel]);
+    }, [fetchParentData, selectedLevel]);
+
+    const handleEdit = (id) => {
+        navigate(`/admin/categories/add`, {
+            state: { id: id },
+        });
+    };
 
     return (
         <div>
@@ -43,8 +49,8 @@ const CategoryList = () => {
                 }
             />
             <section>
-                <div className='float-end'>
-                    <div className='btn-group'>
+                <div className=' my-2'>
+                    <div className='btn-group '>
                         <button
                             type='button'
                             onClick={() => setSelectedLevel(() => 3)}
@@ -77,20 +83,23 @@ const CategoryList = () => {
                         </button>
                     </div>
                 </div>
-                <div>
-                    <table className='table'>
+                <div className='card '>
+                    <table className='table '>
                         <thead>
-                            <tr>
+                            <tr className='table-info'>
                                 <th scope='col'>S.N</th>
+                                <th>Parent</th>
                                 <th scope='col'>Level</th>
                                 <th scope='col'>Title</th>
                                 <th scope='col'>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {catgData?.map((item, index) => (
                                 <tr key={item._id}>
                                     <th scope='row'>{index + 1}</th>
+                                    <td>{item?.parent?.title}</td>
                                     <td>{item.level}</td>
                                     <td>{item.title}</td>
                                     <td>
@@ -103,6 +112,16 @@ const CategoryList = () => {
                                                 {item.status}
                                             </span>
                                         )}
+                                    </td>
+                                    <td>
+                                        <button
+                                            onClick={() => handleEdit(item._id)}
+                                            className='btn btn-sm btn-outline-primary mx-2'>
+                                            Edit
+                                        </button>
+                                        <button className='btn btn-sm btn-outline-danger mx-2'>
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

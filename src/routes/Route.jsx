@@ -20,6 +20,7 @@ import PageNotFound from "../pages/PageNotFound";
 // Products
 import ProductLayout from "../pages/product/Layout";
 import ProductList from "../pages/product/ProductList";
+import ProductAdd from "../pages/product/ProductAdd";
 
 // Category
 import CategoryLayout from "../pages/category/Layout";
@@ -95,9 +96,21 @@ const router = createBrowserRouter([
                                 element: (
                                     <AdminProtectedRoute
                                         permissionRequired={
-                                            ADMIN_PERMISSSION.BOOK_VIEW
+                                            ADMIN_PERMISSSION.PRODUCT_VIEW
                                         }>
                                         <ProductList />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                            {
+                                path: "add",
+
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.PRODUCT_CREATE
+                                        }>
+                                        <ProductAdd />
                                     </AdminProtectedRoute>
                                 ),
                             },

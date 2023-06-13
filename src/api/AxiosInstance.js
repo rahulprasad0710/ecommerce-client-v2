@@ -17,12 +17,12 @@ const user =
 
 export const PublicAxios = axios.create({
     baseURL: BASE_URL,
-    timeout: 1000,
+    timeout: 10000,
 });
 
 export const PrivateAxios = axios.create({
     baseURL: BASE_URL,
-    timeout: 1000,
+    timeout: 10000,
     headers: {
         Authorization: `Bearer ${user?.token}`,
     },

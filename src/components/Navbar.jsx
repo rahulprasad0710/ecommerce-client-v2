@@ -70,9 +70,11 @@ const Navbar = () => {
                         )}
                         {userInfo?.token && userInfo?.isAdmin && (
                             <li className='nav-item'>
-                                <Link to={"/cart"} className='nav-link active'>
+                                <Link
+                                    to={"/admin/dashboard"}
+                                    className='nav-link active'>
                                     <i className='fa-solid fa-user-shield'></i>
-                                    <span className='mx-2'>My Account</span>
+                                    <span className='mx-2'>Dashboard</span>
                                 </Link>
                             </li>
                         )}
