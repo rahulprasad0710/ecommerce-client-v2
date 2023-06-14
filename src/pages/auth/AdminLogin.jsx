@@ -62,6 +62,12 @@ const UserLogin = () => {
             toast.error(errorData?.error);
         }
     };
+
+    if (userInfo?.isAdmin) {
+        navigate("/admin/dashboard", {
+            replace: true,
+        });
+    }
     return (
         <div className='container d-flex justify-content-center'>
             <div className='login-container'>

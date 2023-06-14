@@ -5,9 +5,14 @@ import ADMIN_PERMISSSION from "../../constant/AdminPermission.js";
 import { AuthContext } from "../../context/AuthContext";
 import { PrivateAxios } from "../../api/AxiosInstance";
 import API_ROUTE from "../../api/API_Route";
+import AreYouSure from "../../components/HOC/AreYouSure";
+import ProductModal from "../../components/HOC/ProductModal";
 
 const ProductList = () => {
     const navigate = useNavigate();
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedData, setSelectedData] = useState();
+    const [selectedStatus, setSelectedStatus] = useState();
     const [productData, setProductData] = useState([]);
     const { userInfo } = useContext(AuthContext);
     let isAdminHasPermission = userInfo.Permissions.includes(
@@ -30,7 +35,29 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    const handleEdit = (id) => {};
+    const handleSubmit = async () => {
+        try {
+            const payload = {
+                status: selectedStatus,
+            };
+            const { data } = await PrivateAxios.put(
+                `${API_ROUTE.GET_PRODUCTS}/${selectedData._id}`,
+                payload
+            );
+            console.log(data, "Data");
+            if (data?.sucess) {
+                setOpenModal(false);
+                fetchProducts();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleOpenModal = (product) => {
+        setSelectedData(product);
+        setOpenModal(true);
+    };
 
     return (
         <div>
@@ -96,12 +123,11 @@ const ProductList = () => {
                                     </td>
                                     <td>
                                         <button
-                                            onClick={() => handleEdit(item._id)}
+                                            onClick={() =>
+                                                handleOpenModal(item)
+                                            }
                                             className='btn btn-sm btn-outline-primary mx-2'>
-                                            Edit
-                                        </button>
-                                        <button className='btn btn-sm btn-outline-danger mx-2'>
-                                            Delete
+                                            Change Status
                                         </button>
                                     </td>
                                 </tr>
@@ -110,6 +136,20 @@ const ProductList = () => {
                     </table>
                 </div>
             </section>
+            <AreYouSure
+                openModal={openModal}
+                modalTitle='Do you want to change the product status?'
+                setOpenModal={setOpenModal}>
+                {selectedData && (
+                    <ProductModal
+                        selectedStatus={selectedStatus}
+                        setSelectedStatus={setSelectedStatus}
+                        handleBtnSubmit={handleSubmit}
+                        setOpenModal={setOpenModal}
+                        selectedData={selectedData}
+                    />
+                )}
+            </AreYouSure>
         </div>
     );
 };
