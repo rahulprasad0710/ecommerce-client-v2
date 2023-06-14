@@ -8,6 +8,8 @@ const API_ROUTE = {
     STAFF_LIST: "https://ecommerce-api-jbj8.onrender.com/api/staffs",
     ADD_CATEGORY: "category",
     GET_CATEGORY: "category",
+    //rpoducts
+    GET_PRODUCTS: "/product",
 };
 
 export default API_ROUTE;

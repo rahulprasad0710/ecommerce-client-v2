@@ -83,14 +83,20 @@ const ProductAdd = () => {
                 },
             };
 
-            const response = await PrivateAxios.post(
+            const { data } = await PrivateAxios.post(
                 "/product",
                 formData,
                 config
             );
-            console.log(response, "response");
+            console.log(data, "response");
+            console.log(data?.sucess, "success");
+            if (data?.sucess) {
+                toast.success("Product added successfully");
+                navigate(-1);
+            }
         } catch (error) {
             console.log(error);
+            toast.error(error?.response?.message ?? "Something went wrong.");
         }
     };
     return (
