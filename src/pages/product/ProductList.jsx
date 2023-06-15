@@ -79,6 +79,7 @@ const ProductList = () => {
                                 <th>Thumbnil</th>
                                 <th>Name</th>
                                 <th>category</th>
+                                <th>Featured In</th>
                                 <th scope='col'>MRP</th>
                                 <th scope='col'>price</th>
                                 <th scope='col'>Status</th>
@@ -107,7 +108,8 @@ const ProductList = () => {
                                         )}
                                     </td>
                                     <td>{item?.name}</td>
-                                    <td>category</td>
+                                    <td>{item.category.title}</td>
+                                    <td>{item?.featuredIn}</td>
                                     <td>{item.mrp}</td>
                                     <td>{item.price}</td>
                                     <td>

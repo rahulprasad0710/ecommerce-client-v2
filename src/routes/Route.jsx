@@ -17,6 +17,9 @@ import AddAdmin from "../pages/admin/AddAdmin";
 import AdminList from "../pages/admin/AdminList";
 import PageNotFound from "../pages/PageNotFound";
 
+//public Product
+import ProductDetails from "../pages/product/ProductDetails";
+
 // Products
 import ProductLayout from "../pages/product/Layout";
 import ProductList from "../pages/product/ProductList";
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage />,
+            },
+            {
+                path: "p/:slug",
+                element: <ProductDetails />,
             },
             {
                 path: "/page-not-found",

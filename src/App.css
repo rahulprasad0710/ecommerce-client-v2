@@ -70,3 +70,13 @@
 .sidebar-container .active {
     background-color: #0bd095f8 !important;
 }
+
+.product-wrapper {
+    cursor: pointer;
+}
+.product-item-top-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0.5rem 0rem;
+}
