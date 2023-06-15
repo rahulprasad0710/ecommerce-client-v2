@@ -1,11 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import LOGO from "../assets/img/logo.png";
 
 const Navbar = () => {
-    const { userInfo, logoutFn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { userInfo, logoutFn } = useContext(AuthContext);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearchTermChange = (event) => {
+        console.log(event.target.value, "event.target.value");
+        setSearchTerm(event.target.value);
+    };
+
+    const handleNavigateToProductsPage = () => {
+        navigate(`/products?searchTerm=${searchTerm}`, {
+            replace: true,
+        });
+    };
+
     const handleLogout = () => {
         const isLogout = logoutFn();
         if (isLogout) {
@@ -41,6 +54,25 @@ const Navbar = () => {
                     className='collapse navbar-collapse'
                     id='navbarSupportedContent'>
                     <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+                        <li className='nav-item'>
+                            <div className='input-group '>
+                                <input
+                                    value={searchTerm}
+                                    onChange={(event) =>
+                                        handleSearchTermChange(event)
+                                    }
+                                    type='text'
+                                    className='form-control'
+                                    placeholder='search for products...'
+                                />
+                                <span
+                                    onClick={handleNavigateToProductsPage}
+                                    className='input-group-text cursor-pointer'
+                                    id='basic-addon2'>
+                                    <i className='fa-solid fa-magnifying-glass'></i>
+                                </span>
+                            </div>
+                        </li>
                         {userInfo?.token && !userInfo?.isAdmin && (
                             <>
                                 <li className='nav-item'>

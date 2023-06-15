@@ -18,10 +18,10 @@ const AllFeaturedProducts = () => {
 
     return (
         <div>
-            {PRODUCT_FEATURED.map((item) => (
-                <>
+            {PRODUCT_FEATURED.map((item, index) => (
+                <div key={index}>
                     <FeaturedProducts name={item.name} value={item.value} />
-                </>
+                </div>
             ))}
         </div>
     );

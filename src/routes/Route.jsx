@@ -19,7 +19,7 @@ import PageNotFound from "../pages/PageNotFound";
 
 //public Product
 import ProductDetails from "../pages/product/ProductDetails";
-
+import Products from "../pages/product/Products";
 // Products
 import ProductLayout from "../pages/product/Layout";
 import ProductList from "../pages/product/ProductList";
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage />,
+            },
+            {
+                path: "products",
+                element: <Products />,
             },
             {
                 path: "p/:slug",
