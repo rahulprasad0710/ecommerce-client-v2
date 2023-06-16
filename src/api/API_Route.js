@@ -10,6 +10,9 @@ const API_ROUTE = {
     GET_CATEGORY: "category",
     //rpoducts
     GET_PRODUCTS: "/product",
+
+    GET_CAROUSEL: "/corousel",
+    POST_CAROUSEL: "/corousel",
 };
 
 export default API_ROUTE;

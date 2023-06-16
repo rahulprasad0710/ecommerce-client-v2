@@ -30,6 +30,11 @@ import CategoryLayout from "../pages/category/Layout";
 import CategoryList from "../pages/category/CategoryList";
 import AddCategory from "../pages/category/AddCategory";
 
+// carousel
+import CarouselLayout from "../pages/carousel/Layout";
+import AddCarousel from "../pages/carousel/AddCarousel";
+import CarouselList from "../pages/carousel/CarouselList";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -150,6 +155,36 @@ const router = createBrowserRouter([
                                             ADMIN_PERMISSSION.CATEGORY_VIEW
                                         }>
                                         <CategoryList />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                        ],
+                    },
+                    {
+                        path: "carousel",
+                        element: <CarouselLayout />,
+                        children: [
+                            {
+                                path: "list",
+
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.PRODUCT_VIEW
+                                        }>
+                                        <CarouselList />
+                                    </AdminProtectedRoute>
+                                ),
+                            },
+                            {
+                                path: "add",
+
+                                element: (
+                                    <AdminProtectedRoute
+                                        permissionRequired={
+                                            ADMIN_PERMISSSION.PRODUCT_CREATE
+                                        }>
+                                        <AddCarousel />
                                     </AdminProtectedRoute>
                                 ),
                             },

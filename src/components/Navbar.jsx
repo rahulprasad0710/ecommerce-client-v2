@@ -9,7 +9,6 @@ const Navbar = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearchTermChange = (event) => {
-        console.log(event.target.value, "event.target.value");
         setSearchTerm(event.target.value);
     };
 

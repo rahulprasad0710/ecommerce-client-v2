@@ -116,6 +116,23 @@ const AdminSidebar = () => {
                             </NavLink>
                         </li>
                     )}
+                    {userInfo.Permissions.includes(
+                        ADMIN_PERMISSSION.CATEGORY_VIEW
+                    ) && (
+                        <li className='nav-link-item sidebar-link'>
+                            <NavLink
+                                to='/admin/carousel/list'
+                                title='Category Setting'
+                                className='nav-link  link-dark'>
+                                <i className='fa-solid fa-ticket-simple'></i>
+                                {hideSidebar ? null : (
+                                    <span className='nav-link-text'>
+                                        Carousel
+                                    </span>
+                                )}
+                            </NavLink>
+                        </li>
+                    )}
 
                     {userInfo.Permissions.includes(
                         ADMIN_PERMISSSION.ADMIN_ADD

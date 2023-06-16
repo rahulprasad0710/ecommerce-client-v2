@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useMemo } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import API_ROUTE from "../../api/API_Route";
 import { PublicAxios } from "../../api/AxiosInstance";
@@ -11,14 +11,6 @@ const Products = () => {
     const featuredIn = searchParams.get("featuredIn");
     const searchTerm = searchParams.get("searchTerm");
 
-    const [selectedFeaturedIn, setSelectedFeaturedIn] = useState(
-        featuredIn || ""
-    );
-    const [selectedSearchTerm, setSelectedSearchTerm] = useState(
-        searchTerm || ""
-    );
-
-    const [url, setUrl] = useState(API_ROUTE.GET_PRODUCTS);
     const [products, setProducts] = useState([]);
 
     const fetchProducts = useCallback(async (newUrl) => {
@@ -34,32 +26,25 @@ const Products = () => {
     useEffect(() => {
         const updateUrl = async () => {
             const queryParams = new URLSearchParams();
-            if (selectedFeaturedIn && selectedSearchTerm) {
-                queryParams.set("featuredIn", selectedFeaturedIn);
-                queryParams.set("searchTerm", selectedSearchTerm);
+            if (featuredIn && searchTerm) {
+                queryParams.set("featuredIn", featuredIn);
+                queryParams.set("searchTerm", searchTerm);
             }
-            if (selectedFeaturedIn) {
-                queryParams.set("featuredIn", selectedFeaturedIn);
+            if (featuredIn) {
+                queryParams.set("featuredIn", featuredIn);
             }
-
-            if (selectedSearchTerm) {
-                queryParams.set("searchTerm", selectedSearchTerm);
+            if (searchTerm) {
+                queryParams.set("searchTerm", searchTerm);
             }
-
             const newUrl = `${
                 API_ROUTE.GET_PRODUCTS
             }?${queryParams.toString()}`;
-            setUrl(newUrl);
-            console.log(newUrl, "newUrl");
-
             history.pushState(null, null, `?${queryParams.toString()}`);
-
-            // Call fetchProducts after updating the URL
             fetchProducts(newUrl);
         };
 
         updateUrl();
-    }, [fetchProducts, selectedFeaturedIn, selectedSearchTerm]);
+    }, [fetchProducts, featuredIn, searchTerm]);
 
     return <div>Products</div>;
 };
